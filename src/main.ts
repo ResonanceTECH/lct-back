@@ -1,3 +1,4 @@
+import fastifyCookie from "@fastify/cookie";
 import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import type { NestFastifyApplication } from "@nestjs/platform-fastify";
@@ -16,9 +17,12 @@ async function bootstrap() {
 
 	const configService = app.get(ConfigService);
 	const appName = configService.get("APP_NAME");
-	const httpDocs = initScalar(app, appName);
+	const cookieSecret = configService.get<string>("COOKIE_SECRET") || "SomeSecret";
 
+	const httpDocs = initScalar(app, appName);
 	app.use("/docs", httpDocs);
+
+	await app.register(fastifyCookie, { secret: cookieSecret });
 	await app.listen(3000, "0.0.0.0");
 }
 

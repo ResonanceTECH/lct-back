@@ -1,5 +1,10 @@
 export const ClientErrors = {
 	BadRequest: {
+
+
+
+
+		
 		code: 400
 	},
 	Forbidden: {
