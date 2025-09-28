@@ -1,18 +1,18 @@
-import type { NestFastifyApplication } from "@nestjs/platform-fastify";
+import type { INestApplication } from "@nestjs/common";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { apiReference } from "@scalar/nestjs-api-reference";
 import { patchNestJsSwagger } from "nestjs-zod";
 import { ClientErrors } from "../../common/error-messages";
 
-export const initScalar = async (app: NestFastifyApplication, appName: string) => {
+export const initScalar = (app: INestApplication, appName: string) => {
 	patchNestJsSwagger();
 
 	const errorGroups = Object.entries(ClientErrors)
 		.map(([groupName, { code, ...errors }]) => {
-			const items = Object.values(errors)
-				.map((e) => `<li>${e}</li>`)
+			const errorItems = Object.values(errors)
+				.map((error) => `<li>${error}</li>`)
 				.join("");
-			return `<li><b>${code} - ${groupName}</b><ul>${items}</ul></li>`;
+			return `<li><b>${code} - ${groupName}</b><ul>${errorItems}</ul></li>`;
 		})
 		.join("");
 
@@ -24,9 +24,5 @@ export const initScalar = async (app: NestFastifyApplication, appName: string) =
 
 	const document = SwaggerModule.createDocument(app, swaggerConfig);
 
-	await app.register(apiReference, {
-		routePrefix: "/docs",
-		content: document,
-		withFastify: true
-	});
+	return apiReference({ content: document, withFastify: true });
 };
