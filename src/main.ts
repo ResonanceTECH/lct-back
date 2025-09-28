@@ -15,14 +15,12 @@ async function bootstrap() {
 		}
 	});
 
-	const configService = app.get(ConfigService);
-	const appName = configService.get("APP_NAME");
-	const cookieSecret = configService.get<string>("COOKIE_SECRET") || "SomeSecret";
-	const port = Number(configService.get("APP_PORT")) || 3000;
+	const config = app.get(ConfigService);
+	const appName = config.get<string>("APP_NAME") ?? "App";
+	const cookieSecret = config.get<string>("COOKIE_SECRET") ?? "SomeSecret";
+	const port = Number(config.get("APP_PORT")) || 3000;
 
-	const httpDocs = initScalar(app, appName);
-	await app.register(httpDocs, { prefix: "/docs" });
-
+	await initScalar(app, appName);
 	await app.register(fastifyCookie, { secret: cookieSecret });
 	await app.listen(port, "0.0.0.0");
 }
