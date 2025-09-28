@@ -18,7 +18,7 @@ async function bootstrap() {
 	const config = app.get(ConfigService);
 	const appName = config.get<string>("APP_NAME") ?? "App";
 	const cookieSecret = config.get<string>("COOKIE_SECRET") ?? "SomeSecret";
-	const port = Number(config.get("APP_PORT")) || 3000;
+	const port = Number(config.get<string>("APP_PORT")) || 3000;
 
 	await initScalar(app, appName);
 	await app.register(fastifyCookie, { secret: cookieSecret });

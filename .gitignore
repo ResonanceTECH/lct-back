@@ -31,10 +31,6 @@ lerna-debug.log*
 # IDE - VSCode
 .vscode/*
 
-# dotenv environment variable files
-*.env**
-!.env.example
-
 # temp directory
 .temp
 .tmp

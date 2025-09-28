@@ -9,10 +9,10 @@ export const initScalar = async (app: NestFastifyApplication, appName: string) =
 
 	const errorGroups = Object.entries(ClientErrors)
 		.map(([groupName, { code, ...errors }]) => {
-			const errorItems = Object.values(errors)
+			const items = Object.values(errors)
 				.map((e) => `<li>${e}</li>`)
 				.join("");
-			return `<li><b>${code} - ${groupName}</b><ul>${errorItems}</ul></li>`;
+			return `<li><b>${code} - ${groupName}</b><ul>${items}</ul></li>`;
 		})
 		.join("");
 
