@@ -15,6 +15,59 @@ services:
         networks:
             - ltc-net
 
+    ltc_postgres:
+        image: postgres:14-alpine
+        container_name: ltc_postgres
+        restart: always
+        volumes:
+            - ltc-postgres:/var/lib/postgresql/data
+            - ./postgresql.conf:/etc/postgresql/postgresql.conf
+        environment:
+            - POSTGRES_USER=$PG_USER
+            - POSTGRES_PASSWORD=$PG_PASSWORD
+            - POSTGRES_DB=$DB_NAME
+        ports:
+            - ${PG_PORT}:5432
+        labels:
+            - io.portainer.accesscontrol.teams=LTC
+        networks:
+            - ltc-net
+
+    ltc_redis:
+        image: redis:7-alpine
+        container_name: ltc_redis
+        restart: unless-stopped
+        command: redis-server --replica-read-only no
+        volumes:
+            - /var/devops/ltc/redis:/data
+        ports:
+            - ${REDIS_PORT}:6379
+        networks:
+            - ltc-net
+        labels:
+            - io.portainer.accesscontrol.teams=LTC
+
+    ltc_minio:
+        image: minio/minio:latest
+        container_name: ltc_minio
+        restart: unless-stopped
+        command: server /data --console-address ":9001"
+        ports:
+            - "${S3_PORT}:9000"
+            - "${S3_GUI_PORT}:9001"
+        volumes:
+            - /var/devops/minio-data:/data
+            - /var/devops/minio-config:/root/.minio
+        environment:
+            - MINIO_ROOT_USER=$S3_ROOT_USER
+            - MINIO_ROOT_PASSWORD=$S3_ROOT_PASSWORD
+        labels:
+            - io.portainer.accesscontrol.teams=LTC
+
 networks:
     ltc-net:
         driver: bridge
+
+volumes:
+    ltc-postgres:
+        name: ltc-postgres
