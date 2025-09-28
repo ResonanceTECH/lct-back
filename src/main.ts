@@ -18,12 +18,13 @@ async function bootstrap() {
 	const configService = app.get(ConfigService);
 	const appName = configService.get("APP_NAME");
 	const cookieSecret = configService.get<string>("COOKIE_SECRET") || "SomeSecret";
+	const port = Number(configService.get("APP_PORT")) || 3000;
 
 	const httpDocs = initScalar(app, appName);
-	app.use("/docs", httpDocs);
+	await app.register(httpDocs, { prefix: "/docs" });
 
 	await app.register(fastifyCookie, { secret: cookieSecret });
-	await app.listen(3000, "0.0.0.0");
+	await app.listen(port, "0.0.0.0");
 }
 
 bootstrap();
