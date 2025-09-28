@@ -1,6 +1,6 @@
 services:
-    ltc_server:
-        container_name: ltc-server
+    lct_server:
+        container_name: lct-server
         build:
             context: .
             dockerfile: Dockerfile
@@ -11,16 +11,16 @@ services:
             - "${APP_PORT}:3000"
         restart: unless-stopped
         labels:
-            - io.portainer.accesscontrol.teams=LTC
+            - io.portainer.accesscontrol.teams=LCT
         networks:
-            - ltc-net
+            - lct-net
 
-    ltc_postgres:
+    lct_postgres:
         image: postgres:14-alpine
-        container_name: ltc_postgres
+        container_name: lct_postgres
         restart: always
         volumes:
-            - ltc-postgres:/var/lib/postgresql/data
+            - lct-postgres:/var/lib/postgresql/data
             - ./postgresql.conf:/etc/postgresql/postgresql.conf
         environment:
             - POSTGRES_USER=$PG_USER
@@ -29,27 +29,27 @@ services:
         ports:
             - ${PG_PORT}:5432
         labels:
-            - io.portainer.accesscontrol.teams=LTC
+            - io.portainer.accesscontrol.teams=LCT
         networks:
-            - ltc-net
+            - lct-net
 
-    ltc_redis:
+    lct_redis:
         image: redis:7-alpine
-        container_name: ltc_redis
+        container_name: lct_redis
         restart: unless-stopped
         command: redis-server --replica-read-only no
         volumes:
-            - /var/devops/ltc/redis:/data
+            - /var/devops/lct/redis:/data
         ports:
             - ${REDIS_PORT}:6379
         networks:
-            - ltc-net
+            - lct-net
         labels:
-            - io.portainer.accesscontrol.teams=LTC
+            - io.portainer.accesscontrol.teams=LCT
 
-    ltc_minio:
+    lct_minio:
         image: minio/minio:latest
-        container_name: ltc_minio
+        container_name: lct_minio
         restart: unless-stopped
         command: server /data --console-address ":9001"
         ports:
@@ -62,12 +62,12 @@ services:
             - MINIO_ROOT_USER=$S3_ROOT_USER
             - MINIO_ROOT_PASSWORD=$S3_ROOT_PASSWORD
         labels:
-            - io.portainer.accesscontrol.teams=LTC
+            - io.portainer.accesscontrol.teams=LCT
 
 networks:
-    ltc-net:
+    lct-net:
         driver: bridge
 
 volumes:
-    ltc-postgres:
-        name: ltc-postgres
+    lct-postgres:
+        name: lct-postgres
