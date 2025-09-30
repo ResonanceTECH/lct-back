@@ -3,7 +3,9 @@ import { ConfigService } from "@nestjs/config";
 import { NestFactory } from "@nestjs/core";
 import type { NestFastifyApplication } from "@nestjs/platform-fastify";
 import { FastifyAdapter } from "@nestjs/platform-fastify";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { config } from "dotenv";
+import "reflect-metadata";
 import { AppModule } from "./app.module";
 import { initScalar } from "./core/http/documentation";
 
