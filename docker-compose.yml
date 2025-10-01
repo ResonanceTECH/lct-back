@@ -1,6 +1,6 @@
 services:
     lct_server:
-        container_name: lct-server
+        container_name: lct_server
         build:
             context: .
             dockerfile: Dockerfile

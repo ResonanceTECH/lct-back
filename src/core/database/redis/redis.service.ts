@@ -8,7 +8,7 @@ export class RedisService {
 
 	constructor(protected configService: ConfigService) {
 		const host = configService.get("REDIS_HOST");
-		const port = +(configService.get("REDIS_PORT") || 6379);
+		const port = 6379;
 
 		this.client = new Redis({ host, port, db: 0 });
 	}
