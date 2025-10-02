@@ -9,7 +9,6 @@ import { OrganizationService } from "./organization.service";
 @Module({
 	imports: [JwtModule.register({}), RedisModule, UserRepositoryModule, OrganizationRepositoryModule],
 	controllers: [OrganizationController],
-	providers: [OrganizationService],
-	exports: []
+	providers: [OrganizationService]
 })
 export class OrganizationModule {}

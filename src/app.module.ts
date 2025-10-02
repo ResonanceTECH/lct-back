@@ -10,6 +10,7 @@ import { AuthGuard } from "./modules/auth/auth.guard";
 import { AuthModule } from "./modules/auth/auth.module";
 import { RolesGuard } from "./modules/auth/roles.guard";
 import { OrganizationModule } from "./modules/organization/organization.module";
+import { ProjectModule } from "./modules/project/project.module";
 
 @Module({
 	imports: [
@@ -22,7 +23,8 @@ import { OrganizationModule } from "./modules/organization/organization.module";
 		}),
 		RedisModule,
 		AuthModule,
-		OrganizationModule
+		OrganizationModule,
+		ProjectModule
 	],
 	controllers: [],
 	providers: [

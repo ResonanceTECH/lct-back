@@ -24,12 +24,12 @@ function isValidINN(inn: string): boolean {
 }
 
 const schema = z.object({
-	name: z.string(),
+	name: z.string().min(2, ClientErrors.BadRequest.StringToShort).max(255, ClientErrors.BadRequest.StringToLong),
 	inn: z
 		.string()
 		.regex(/^(?!00)\d{2}(?:\d{8}|\d{10})$/, ClientErrors.BadRequest.InvalidFormat)
 		.refine(isValidINN, ClientErrors.BadRequest.InvalidFormat),
-	ceo: z.string(),
+	ceo: z.string().min(2, ClientErrors.BadRequest.StringToShort).max(255, ClientErrors.BadRequest.StringToLong),
 	address: z.string()
 });
 

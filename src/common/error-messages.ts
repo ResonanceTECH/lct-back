@@ -9,7 +9,9 @@ export const ClientErrors = {
 		StringToLong: "STRING-TO-LONG",
 		InvalidFormat: "INVALID-FORMAT",
 		ValueNotInEnum: "VALUE-NOT-IN-ENUM",
-		OrganizationAlreadyExists: "ORGANIZATION-ALREADY-EXISTS"
+		OrganizationAlreadyExists: "ORGANIZATION-ALREADY-EXISTS",
+		MustBePositive: "MUST-BE-POSITIVE",
+		MustBeInteger: "MUST-BE-INTEGER"
 	},
 	Forbidden: {
 		NotEnoughPermissions: "NOT-ENOUGH-PERMISSIONS",
@@ -18,6 +20,7 @@ export const ClientErrors = {
 	},
 	NotFound: {
 		code: 404,
+		OrganizationNotFound: "ORGANIZATION-NOT-FOUND",
 		TokenNotFound: "TOKEN-NOT-FOUND",
 		UserNotFound: "USER-NOT-FOUND"
 	},
