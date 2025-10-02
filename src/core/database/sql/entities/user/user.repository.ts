@@ -97,7 +97,6 @@ export class UserRepository implements IBaseCRUD<User> {
 		const r = this.getRepo(manager);
 		const upd = await r.update({ id } as FindOptionsWhere<User>, doc);
 		if (returnDoc) {
-			// приведение id к числу, если нужно
 			return r.findOne({ where: { id: Number(id) } as FindOptionsWhere<User> }) as Promise<User>;
 		}
 		return upd.affected ?? 0;

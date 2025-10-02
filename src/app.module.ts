@@ -9,6 +9,7 @@ import { dataSourceOptions } from "./core/database/sql/sql.config";
 import { AuthGuard } from "./modules/auth/auth.guard";
 import { AuthModule } from "./modules/auth/auth.module";
 import { RolesGuard } from "./modules/auth/roles.guard";
+import { OrganizationModule } from "./modules/organization/organization.module";
 
 @Module({
 	imports: [
@@ -20,7 +21,8 @@ import { RolesGuard } from "./modules/auth/roles.guard";
 			useFactory: async () => dataSourceOptions
 		}),
 		RedisModule,
-		AuthModule
+		AuthModule,
+		OrganizationModule
 	],
 	controllers: [],
 	providers: [

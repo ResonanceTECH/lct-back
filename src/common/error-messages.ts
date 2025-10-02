@@ -8,7 +8,8 @@ export const ClientErrors = {
 		StringToShort: "STRING-TO-SHORT",
 		StringToLong: "STRING-TO-LONG",
 		InvalidFormat: "INVALID-FORMAT",
-		ValueNotInEnum: "VALUE-NOT-IN-ENUM"
+		ValueNotInEnum: "VALUE-NOT-IN-ENUM",
+		OrganizationAlreadyExists: "ORGANIZATION-ALREADY-EXISTS"
 	},
 	Forbidden: {
 		NotEnoughPermissions: "NOT-ENOUGH-PERMISSIONS",
