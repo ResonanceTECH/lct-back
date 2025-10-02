@@ -5,5 +5,5 @@ export interface IPagination {
 
 export interface IPaginationResponse<T> {
 	total: number;
-	body: T[];
+	rows: T[];
 }
