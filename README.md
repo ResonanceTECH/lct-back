@@ -29,6 +29,7 @@
 ## Project setup
 
 ```bash
+$ cp .env.example .env # And add your env
 $ npm install
 ```
 
